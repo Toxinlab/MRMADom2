@@ -14,7 +14,7 @@
         android:layout_margin="10dp"
         android:hint="@string/top_hint"/>
 
-    <view class="android.support.v7.app.AlertController$RecycleListView"
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/grid_layout_middle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
         android:padding="10dp">
 
 
-    </view>
+    </androidx.recyclerview.widget.RecyclerView>
 
     <LinearLayout
         android:id="@+id/bottom_linear_layout"
