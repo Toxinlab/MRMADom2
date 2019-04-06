@@ -11,6 +11,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ContactCardAdapter extends RecyclerView.Adapter<ContactCardAdapter.ContactCardHolder> {
@@ -46,9 +47,14 @@ public class ContactCardAdapter extends RecyclerView.Adapter<ContactCardAdapter.
     }
 
     public void setData(ArrayList<Contact> dataset){
+        ContactDiffCallback callback = new ContactDiffCallback(mDataset,dataset);
+        DiffUtil.DiffResult result = DiffUtil.calculateDiff(callback);
+
         mDataset.clear();
         mDataset.addAll(dataset);
-        notifyDataSetChanged();
+
+        result.dispatchUpdatesTo(this);
+
     }
 
     public class ContactCardHolder extends RecyclerView.ViewHolder{

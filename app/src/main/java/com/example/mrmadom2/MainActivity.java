@@ -2,6 +2,10 @@ package com.example.mrmadom2;
 
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridLayout;
 
@@ -21,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private ContactViewModel mViewModel;
     private EditText mFilterEditText;
     private EditText mAddEditText;
+    private Button mButton;
 
 
 
@@ -51,6 +56,39 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initButtons(){
+
+        mFilterEditText = findViewById(R.id.top_edit_text);
+        mAddEditText = findViewById(R.id.bottom_edit_text);
+        mButton = findViewById(R.id.bottom_button);
+
+        mButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String temp = mAddEditText.getText().toString();
+                mContacts.add(new Contact(Util.generateId(), temp,temp+"ic","23444124", temp+"@ov.a"));
+                mAdapter.setData(mContacts);
+            }
+        });
+
+        mFilterEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mViewModel.filterContacts(s.toString());
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+
 
     }
 
